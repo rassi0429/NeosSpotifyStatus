@@ -57,7 +57,18 @@ namespace NeosSpotifyStatus
                 return;
             }
 
-            var currentPlayback = await Spotify.Player.GetCurrentPlayback();
+
+            CurrentlyPlayingContext currentPlayback = null;
+
+            try
+            {
+                currentPlayback = await Spotify.Player.GetCurrentPlayback();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+            }
+
 
             if (currentPlayback == null || currentPlayback.Item == null) // move this to individual checks on trackers
             {
